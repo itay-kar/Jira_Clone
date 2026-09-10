@@ -30,10 +30,10 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [ ] Basic tests for auth flow
 
 ## Phase 3 — Projects & Boards (Backend)
-- [ ] Project model + CRUD endpoints (create/list/get/update/delete)
-- [ ] ProjectMember model (invite/add users to a project)
-- [ ] Board model (each project has one default board, or supports multiple)
-- [ ] Column model (To Do / In Progress / Done, reorderable)
+- [X] Project model + CRUD endpoints (create/list/get/update/delete)
+- [X] ProjectMember model (invite/add users to a project)
+- [X] Board model (each project has one default board, or supports multiple)
+- [X] Column model (To Do / In Progress / Done, reorderable)
 - [ ] Seed script with realistic fake data (use `@faker-js/faker`)
 
 ## Phase 4 — Tickets (Backend)
