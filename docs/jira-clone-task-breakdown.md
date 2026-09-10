@@ -45,12 +45,12 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [X] Filtering/search endpoint (by assignee, label, status)
 
 ## Phase 5 — Frontend Foundation
-- [ ] Init Vite + React + TypeScript project
-- [ ] Set up Tailwind
-- [ ] Set up routing (React Router): login, project list, board view
-- [ ] Set up API client (axios/fetch wrapper) with auth token handling
-- [ ] Set up global state (React Query for server state; Zustand/Context for UI state)
-- [ ] Login/Register pages wired to backend
+- [X] Init Vite + React + TypeScript project
+- [X] Set up Tailwind
+- [X] Set up routing (React Router): login, project list, board view
+- [X] Set up API client (axios/fetch wrapper) with auth token handling
+- [X] Set up global state (React Query for server state; Zustand/Context for UI state)
+- [X] Login/Register pages wired to backend
 
 ## Phase 6 — Project & Board UI
 - [ ] Project list page (create/select project)
