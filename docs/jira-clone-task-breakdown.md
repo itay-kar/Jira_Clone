@@ -22,11 +22,11 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [X] Set up basic error-handling middleware and logging (e.g. pino/winston)
 
 ## Phase 2 — Auth
-- [ ] User model: email, password hash, name
-- [ ] Register endpoint (hash password with bcrypt)
-- [ ] Login endpoint (issue JWT)
-- [ ] Auth middleware (verify JWT, attach user to request)
-- [ ] Role/permission model (Admin vs Member per project)
+- [X] User model: email, password hash, name
+- [X] Register endpoint (hash password with bcrypt)
+- [X] Login endpoint (issue JWT)
+- [X] Auth middleware (verify JWT, attach user to request)
+- [X] Role/permission model (Admin vs Member per project)
 - [ ] Basic tests for auth flow
 
 ## Phase 3 — Projects & Boards (Backend)

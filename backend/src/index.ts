@@ -4,12 +4,14 @@ import express from 'express';
 import pinoHttp from 'pino-http';
 import { logger } from './logger';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
-import {authRouter} from './auth/auth.route';
+import { authRouter } from './auth/auth.route';
+import { projectRouter } from './projects/project.routes';
 
 const app = express();
 app.use(express.json());
 app.use(pinoHttp({ logger }));
 app.use('/v1/auth', authRouter);
+app.use('/v1/projects', projectRouter);
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
