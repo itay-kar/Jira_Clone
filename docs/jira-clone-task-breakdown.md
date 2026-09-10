@@ -37,12 +37,12 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [ ] Seed script with realistic fake data (use `@faker-js/faker`)
 
 ## Phase 4 — Tickets (Backend)
-- [ ] Ticket model (title, description, type, priority, assignee, status/column, labels)
-- [ ] CRUD endpoints for tickets
-- [ ] Comment model + endpoints (add/list comments on a ticket)
-- [ ] Label model + endpoints
-- [ ] Endpoint for moving a ticket between columns (updates order/position)
-- [ ] Filtering/search endpoint (by assignee, label, status)
+- [X] Ticket model (title, description, type, priority, assignee, status/column, labels)
+- [X] CRUD endpoints for tickets
+- [X] Comment model + endpoints (add/list comments on a ticket)
+- [X] Label model + endpoints
+- [X] Endpoint for moving a ticket between columns (updates order/position)
+- [X] Filtering/search endpoint (by assignee, label, status)
 
 ## Phase 5 — Frontend Foundation
 - [ ] Init Vite + React + TypeScript project

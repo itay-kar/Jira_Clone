@@ -3,6 +3,7 @@ import { createTicketSchema, updateTicketSchema , moveTicketSchema , createComme
 import { createTicket, getTicketById, listTicketsForProject, updateTicket , moveTicket, addComment } from './ticket.service';
 import { requireAuth, AuthRequest } from '../middleware/auth';
 import { ValidationError } from '../errors';
+import { attachLabelToTicket, detachLabelFromTicket } from '../labels/label.service'; // add to imports
 
 interface ProjectParams {
     projectId: string;
@@ -60,4 +61,14 @@ ticketRouter.post('/:id/comments', async (req: AuthRequest, res) => {
 
   const comment = await addComment(req.params.id as string, req.userId!, parsed.data.body);
   res.status(201).json(comment);
+});
+
+ticketRouter.post('/:id/labels/:labelId', async (req, res) => {
+  const result = await attachLabelToTicket(req.params.id as string, req.params.labelId as string);
+  res.status(201).json(result);
+});
+
+ticketRouter.delete('/:id/labels/:labelId', async (req, res) => {
+  await detachLabelFromTicket(req.params.id as string, req.params.labelId as string);
+  res.status(204).send();
 });
