@@ -19,7 +19,7 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [x] Set up Prisma, define initial schema (User, Project)
 - [x] Run first migration, verify DB connection
 - [x] Add environment config (`.env`, config module)
-- [ ] Set up basic error-handling middleware and logging (e.g. pino/winston)
+- [X] Set up basic error-handling middleware and logging (e.g. pino/winston)
 
 ## Phase 2 — Auth
 - [ ] User model: email, password hash, name

@@ -17,7 +17,7 @@ export function errorHandler(err: unknown, req: Request, res: Response, next: Ne
     return res.status(500).json({
         error: {
             code: 'INTERNAL_ERROR',
-            message: 'An unexpected error occurred',
+            message: `An unexpected error occurred`,
         },
     });
 }
@@ -26,6 +26,6 @@ export function notFoundHandler(req: Request, res: Response) {
     res.status(404).json({
         error: {
             code: 'NOT_FOUND',
-            message: 'No route for ${req.method} ${req.path}'},
+            message: `No route for ${req.method} ${req.path}`},
         });
     }
