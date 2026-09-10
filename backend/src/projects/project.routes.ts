@@ -4,6 +4,8 @@ import { createProject, listProjectsForUser, getProjectById, updateProject } fro
 import { requireAuth , AuthRequest } from '../middleware/auth';
 import { requireProjectRole } from '../middleware/requireProjectRole';
 import { ValidationError } from '../errors';
+import { deleteProject } from './project.service'; // add to existing import
+
 
 export const projectRouter = Router();
 
@@ -37,4 +39,9 @@ projectRouter.patch('/:id', requireProjectRole('ADMIN'), async (req, res) => {
 
     const project = await updateProject(req.params.id as string, parsed.data.name!);
     res.json(project);
+});
+
+projectRouter.delete('/:id', requireProjectRole('ADMIN'), async (req, res) => {
+  await deleteProject(req.params.id as string);
+  res.status(204).send();
 });
