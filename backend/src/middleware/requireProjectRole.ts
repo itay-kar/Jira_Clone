@@ -5,8 +5,8 @@ import { ForbiddenError , NotFoundError } from '../errors';
 
 export function requireProjectRole(...allowedRoles: ('ADMIN' | 'MEMBER')[]) {
     return async (req: AuthRequest, res: Response, next: NextFunction) => {
-        const projectId = req.params.projectId || req.params.id;
-        const membership = await prisma.projectMembership.findUnique({
+        const projectId = (req.params.projectId ?? req.params.id) as string;
+        const membership = await prisma.projectMember.findUnique({
             where: {
                 projectId_userId: { projectId , userId: req.userId! },
             },
