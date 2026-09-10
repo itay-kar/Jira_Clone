@@ -8,8 +8,10 @@ import { authRouter } from './auth/auth.route';
 import { projectRouter } from './projects/project.routes';
 import { ticketRouter , projectTicketRouter} from './tickets/ticket.routes';
 import { projectLabelRouter } from './labels/label.routes';
+import cors from 'cors';
 
 const app = express();
+app.use(cors({ origin: 'http://localhost:5173' })); // Adjust the origin as needed
 app.use(express.json());
 app.use(pinoHttp({ logger }));
 app.use('/v1/auth', authRouter);
