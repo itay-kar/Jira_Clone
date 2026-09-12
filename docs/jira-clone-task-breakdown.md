@@ -83,8 +83,8 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [ ] Basic frontend component tests (React Testing Library) for critical flows
 
 ## Phase 11 — DevOps & Deployment
-- [ ] Dockerfile for backend, Dockerfile for frontend
-- [ ] `docker-compose.yml` (backend + frontend + Postgres + Redis)
+- [X] Dockerfile for backend, Dockerfile for frontend
+- [X] `docker-compose.yml` (backend + frontend + Postgres + Redis)
 - [ ] GitHub Actions workflow: lint + test on PR
 - [ ] GitHub Actions workflow: build & push Docker images on merge to main
 - [ ] Deploy to a free-tier host (Render/Railway/Fly.io) or a small VPS
