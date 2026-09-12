@@ -1,4 +1,4 @@
-# Jira Clone — Task Breakdown
+# Jira Clone — Task Breakdown (v1)
 
 Stack: Node.js + TypeScript + Express/NestJS, Prisma, PostgreSQL, React + TS + Vite, Socket.IO, Docker, GitHub Actions
 
