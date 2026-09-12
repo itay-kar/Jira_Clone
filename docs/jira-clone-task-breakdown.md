@@ -72,8 +72,8 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [X] Test with two browser sessions to confirm live sync
 
 ## Phase 9 — Search, Filters, Polish Features
-- [ ] Filter bar (by assignee, label, priority) on the board
-- [ ] Global search across tickets
+- [X] Filter bar (by assignee, label, priority) on the board
+- [X] Global search across tickets
 - [ ] Basic activity log per ticket (who changed what, when)
 - [ ] (Stretch) Sprints/backlog view
 

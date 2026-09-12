@@ -17,6 +17,7 @@ import CreateTicketForm from '../components/CreateTicketForm';
 import TicketCard from '../components/TicketCard';
 import TicketDetailPanel from '../components/TicketDetailPanel';
 import type { Ticket, Board } from '../lib/types';
+import FilterBar from '../components/FilterBar'
 
 interface Project {
   id: string;
@@ -31,6 +32,8 @@ export default function BoardPage() {
   const [addingToColumn, setAddingToColumn] = useState<string | null>(null);
   const [openTicketId, setOpenTicketId] = useState<string | null>(null);
   const [activeTicket, setActiveTicket] = useState<Ticket | null>(null);
+  const [priorityFilter , setPriorityFilter] = useState('');
+  const [searchTerm , setSearchTerm] = useState('');
 
   useEffect( () => {
     if (!projectId) return;
@@ -135,11 +138,20 @@ export default function BoardPage() {
         <h1 className="font-semibold">{project.name}</h1>
       </header>
 
+      <FilterBar
+        priority={priorityFilter}
+        onPriorityChange={setPriorityFilter}
+        search={searchTerm}
+        onSearchChange={setSearchTerm}
+      />
+
       <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <div className="flex gap-5 p-6 overflow-x-auto">
           {columns.map((col) => {
             const colTickets = (tickets ?? [])
               .filter((t) => t.columnId === col.id)
+              .filter((t) => !priorityFilter || t.priority== priorityFilter)
+              .filter((t) => !searchTerm || t.title.toLowerCase().includes(searchTerm.toLowerCase()))
               .sort((a, b) => a.order - b.order);
 
             return (
