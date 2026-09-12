@@ -2,7 +2,7 @@ import {Request, Response, NextFunction} from 'express';
 import {AppError} from '../errors';
 import {logger} from '../logger';
 
-export function errorHandler(err: unknown, req: Request, res: Response, next: NextFunction) {
+export function errorHandler(err: unknown, req: Request, res: Response, _next: NextFunction) {
     if (err instanceof AppError) {
         logger.warn({ err , path: req.path}, err.message);
         return res.status(err.statusCode).json({

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { AxiosError } from 'axios';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -25,9 +26,11 @@ export default function RegisterPage() {
       const res = await api.post('/auth/register', { name, email, password, confirmPassword });
       login(res.data.token);
       navigate('/projects');
-    } catch (err: any) {
-      const message = err?.response?.data?.error?.message || 'Registration failed';
-      setError(message);
+    } catch (err) {
+      const message =
+      err instanceof AxiosError ?
+      err?.response?.data?.error?.message : 'Registration failed';
+      setError(message || 'Registration failed');
     }
   }
 

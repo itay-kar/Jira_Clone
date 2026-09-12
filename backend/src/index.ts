@@ -12,7 +12,6 @@ import { ticketRouter , projectTicketRouter} from './tickets/ticket.routes';
 import { projectLabelRouter } from './labels/label.routes';
 import cors from 'cors';
 import { setIO } from './lib/socket';
-import { Socket } from 'dgram';
 
 const app = express();
 const httpServer = createServer(app);

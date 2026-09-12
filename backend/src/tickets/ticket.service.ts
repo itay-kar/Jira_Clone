@@ -1,8 +1,7 @@
 import {prisma} from '../lib/prisma';
 import {NotFoundError} from '../errors';
 import { getIO } from '../lib/socket';
-import { projectLabelRouter } from '../labels/label.routes';
-
+import { Prisma } from '../generated/prisma/client';
 
 export async function createTicket(projectId: string, columnId: string, data: { title: string; description?: string; type: string; assigneeId?: string; priority: string }) { 
     const lastTicket = await prisma.ticket.findFirst({
@@ -18,7 +17,7 @@ export async function createTicket(projectId: string, columnId: string, data: { 
             projectId,
             columnId,
             order,
-        } as any, // Type assertion to satisfy TypeScript
+        } as Prisma.TicketUncheckedCreateInput, // Type assertion to satisfy TypeScript
         include: { assignee: true , labels: { include: { label: true } } },
     });
 
@@ -49,7 +48,7 @@ export async function listTicketsForProject(projectId: string , filters: { assig
         where: {
             projectId,
             ...(filters.assigneeId && { assigneeId: filters.assigneeId }),
-            ...(filters.priority && { priority: filters.priority as any }),
+            ...(filters.priority && { priority: filters.priority as 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT' }),
             ...(filters.labelId && { labels: { some: { labelId: filters.labelId } } }),
         },
         include: { assignee: true , labels: { include: { label: true } } },

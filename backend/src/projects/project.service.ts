@@ -67,6 +67,8 @@ export async function updateProject(projectId: string, name: string) {
         where: { id: projectId },
         data: { name },
     });
+
+    return project
 }
 
 export async function deleteProject(projectId: string) {
