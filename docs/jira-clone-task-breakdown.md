@@ -53,17 +53,17 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [X] Login/Register pages wired to backend
 
 ## Phase 6 — Project & Board UI
-- [ ] Project list page (create/select project)
-- [ ] Board page layout (columns rendered from API data)
-- [ ] Ticket card component (shows title, assignee avatar, labels, priority)
-- [ ] Create/edit ticket modal or side panel
-- [ ] Ticket detail view (description, comments, activity)
+- [X] Project list page (create/select project)
+- [X] Board page layout (columns rendered from API data)
+- [X] Ticket card component (shows title, assignee avatar, labels, priority)
+- [X] Create/edit ticket modal or side panel
+- [X] Ticket detail view (description, comments, activity)
 
 ## Phase 7 — Drag & Drop
-- [ ] Integrate dnd-kit for column/card dragging
-- [ ] On drop, call API to persist new column/position
-- [ ] Optimistic UI update, rollback on failure
-- [ ] Handle reordering within the same column
+- [X] Integrate dnd-kit for column/card dragging
+- [X] On drop, call API to persist new column/position
+- [X] Optimistic UI update, rollback on failure
+- [X] Handle reordering within the same column
 
 ## Phase 8 — Real-Time Sync
 - [ ] Set up Socket.IO server (attach to Express/NestJS)

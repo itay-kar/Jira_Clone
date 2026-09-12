@@ -1,3 +1,5 @@
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import type { Ticket } from '../lib/types';
 
 const PRIORITY_COLOR: Record<Ticket['priority'], string> = {
@@ -14,8 +16,25 @@ const TYPE_LABEL: Record<Ticket['type'], string> = {
 };
 
 export default function TicketCard({ticket, onClick}: {ticket: Ticket, onClick: () => void}) { 
+    const { attributes , listeners , setNodeRef, transform, transition, isDragging } = useSortable({
+        id: ticket.id
+    })
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.4 : 1,
+    }
+
     return (
-        <button onClick={onClick} className="w-full text-left bg-surface border border-border rounded-md p-3 hover:border-ink/30 transition-colors">
+        <div
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            {...listeners}
+            onClick={onClick} 
+            className="w-full text-left bg-surface border border-border rounded-md p-3 hover:border-ink/30 transition-colors"
+        >
             <div className="flex items-start justify-between gap-2 mb-2">
                 <span className="text-sm font-medium leading-snug">{ticket.title}</span>
                 <span className={`shrink-0 w-2 h-2 rounded-full mt-1.5 ${PRIORITY_COLOR[ticket.priority]}`}/>
@@ -46,6 +65,6 @@ export default function TicketCard({ticket, onClick}: {ticket: Ticket, onClick: 
                 </span>
             )}
         </div>
-        </button>
+        </div>
     )
 }
