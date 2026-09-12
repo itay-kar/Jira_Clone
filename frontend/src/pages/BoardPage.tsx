@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
+import { getSocket } from '../lib/socket';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
@@ -31,6 +32,33 @@ export default function BoardPage() {
   const [openTicketId, setOpenTicketId] = useState<string | null>(null);
   const [activeTicket, setActiveTicket] = useState<Ticket | null>(null);
 
+  useEffect( () => {
+    if (!projectId) return;
+
+    const socket = getSocket();
+    socket.emit('join-project', projectId);
+
+    function handleTicketChange(ticket: Ticket){
+      queryClient.setQueryData(['tickets', projectId], (old : Ticket[] | undefined) => {
+        if (!old) return old;
+        const exists = old.some((t) => t.id === ticket.id);
+        return exists ? 
+          old.map((t) => (t.id === ticket.id ? ticket : t))
+          : [...old , ticket]
+          });
+    }
+
+    socket.on('ticket:moved',handleTicketChange);
+    socket.on('ticket:updated',handleTicketChange);
+    socket.on('ticket:created',handleTicketChange);
+
+    return () => {
+      socket.off('ticket:moved',handleTicketChange);
+      socket.off('ticket:updated',handleTicketChange);
+      socket.off('ticket:created',handleTicketChange);
+    };
+  },[projectId,queryClient]);
+
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 4 } }));
 
   const { data: project } = useQuery({
@@ -48,7 +76,6 @@ export default function BoardPage() {
   const moveTicket = useMutation({
     mutationFn: async ({ ticketId, columnId, order }: { ticketId: string; columnId: string; order: number }) =>
       (await api.patch(`/tickets/${ticketId}/move`, { columnId, order })).data,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tickets', projectId] }),
   });
 
   function handleDragStart(event: DragStartEvent) {

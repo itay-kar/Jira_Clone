@@ -66,10 +66,10 @@ Each task is scoped to roughly 1–3 hours. Check them off as you go.
 - [X] Handle reordering within the same column
 
 ## Phase 8 — Real-Time Sync
-- [ ] Set up Socket.IO server (attach to Express/NestJS)
-- [ ] Emit event when a ticket moves/updates
-- [ ] Frontend: connect to socket, listen for updates, patch local state
-- [ ] Test with two browser sessions to confirm live sync
+- [X] Set up Socket.IO server (attach to Express/NestJS)
+- [X] Emit event when a ticket moves/updates
+- [X] Frontend: connect to socket, listen for updates, patch local state
+- [X] Test with two browser sessions to confirm live sync
 
 ## Phase 9 — Search, Filters, Polish Features
 - [ ] Filter bar (by assignee, label, priority) on the board

@@ -1,5 +1,8 @@
 import {prisma} from '../lib/prisma';
 import {NotFoundError} from '../errors';
+import { getIO } from '../lib/socket';
+import { projectLabelRouter } from '../labels/label.routes';
+
 
 export async function createTicket(projectId: string, columnId: string, data: { title: string; description?: string; type: string; assigneeId?: string; priority: string }) { 
     const lastTicket = await prisma.ticket.findFirst({
@@ -9,7 +12,7 @@ export async function createTicket(projectId: string, columnId: string, data: { 
 
     const order = (lastTicket?.order ?? 0) + 1000;
 
-    return prisma.ticket.create({
+    const created = await prisma.ticket.create({
         data: {
             ...data,
             projectId,
@@ -18,6 +21,10 @@ export async function createTicket(projectId: string, columnId: string, data: { 
         } as any, // Type assertion to satisfy TypeScript
         include: { assignee: true , labels: { include: { label: true } } },
     });
+
+    getIO().to(`project:${created.projectId}`).emit(`ticket:created`, created);
+
+    return created;
 }
 
 export async function getTicketById(ticketId: string) {
@@ -56,10 +63,15 @@ export async function updateTicket(ticketId: string, data: Record<string, unknow
         throw NotFoundError('Ticket not found');
     }
 
-    return prisma.ticket.update({
+    const updated = await prisma.ticket.update({
         where: { id: ticketId },
-        data
+        data,
+        include: { assignee: true , labels: { include: { label: true } } },
     });
+
+    getIO().to(`project:${updated.projectId}`).emit('ticket:updated',updated);
+
+    return updated;
 }
 
 export async function moveTicket(ticketId: string, columnId: string, order: number) {
@@ -68,10 +80,15 @@ export async function moveTicket(ticketId: string, columnId: string, order: numb
         throw NotFoundError('Ticket not found');
     }
     
-    return prisma.ticket.update({
+    const updated = await prisma.ticket.update({
         where: { id: ticketId },
         data: { columnId, order },
+        include: { assignee: true , labels: { include: { label: true } } },
     });
+
+    getIO().to(`project:${updated.projectId}`).emit('ticket:moved',updated);
+
+    return updated;
 }
 
 export async function addComment(ticketId: string, authorId: string, body: string) {
